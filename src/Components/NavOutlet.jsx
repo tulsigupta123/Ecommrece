@@ -1,16 +1,18 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import ExclusiveLogo from '../assets/Images/HomeImg/ExclusiveLogo.svg'
 import WishlistIcon from '../assets/Images/HomeImg/WishlistIcon.svg'
 import cartIcon from '../assets/Images/HomeImg/cartIcon.svg'
 import searchIcon from '../assets/Images/HomeImg/searchIcon.svg'
 import {NavLink} from 'react-router-dom'
+import {authContext} from '../Components/Context.jsx'
 
 const NavOutlet = () => {
+  const {cartItem,wishlistItem} = useContext(authContext);
   return (
        <div className="flex items-center justify-around p-4" style={{backgroundColor:'#808023',padding:'8px 5px'}}>
-    <div className="bg-grey-300 p-3">
+   <NavLink to='/'>  <div className="bg-grey-300 p-3">
       <img src={ExclusiveLogo} alt="Logo" />
-    </div>
+    </div></NavLink>
     <div className="ml-[80px]">
         <ul className="flex list-style-none ml-5" style={{listStyle:'none'}}>
            <NavLink to='/'> <li style={{marginRight:'18px',fontSize:'17px'}}>
@@ -33,8 +35,21 @@ const NavOutlet = () => {
     <img src={searchIcon} alt="" style={{height:'16px',width:'16px',position:'absolute',top:'10px',right:'17px'}}/>
     </div>
       <div className="ml-[80px]">
-       <NavLink to='/wishlist'>  <img src={WishlistIcon} alt="" className="h-5 w-5" style={{height:'21px',width:'21px',marginRight:'14px'}}/></NavLink>
-       <NavLink to='/cart-page'>  <img src={cartIcon} alt="" className="h-5 w-5" style={{height:'24px',width:'24px'}}/></NavLink>
+       <NavLink to='/wishlist'>  <img src={WishlistIcon} alt="" className="h-5 w-5" style={{height:'21px',width:'21px',marginRight:'14px',position:'relative'}}/> 
+       {
+        wishlistItem.length > 0 ? (
+       <span style={{position:'absolute',top:'10px',right:'85px',color:'white',backgroundColor:'red',padding:'2px 4px',borderRadius:'50%',fontSize:'12px'}}>{wishlistItem.length}</span>
+        ):
+        null
+       }
+       </NavLink>
+       <NavLink to='/cart-page'>  <img src={cartIcon} alt="" className="h-5 w-5" style={{height:'24px',width:'24px',position:'relative'}}/>
+         {
+        cartItem.length > 0 ? (
+       <span style={{position:'absolute',top:'10px',right:'38px',color:'white',backgroundColor:'red',padding:'2px 4px',borderRadius:'50%',fontSize:'12px'}}>{cartItem.length}</span>
+        ):
+        null
+       }</NavLink>
     </div>
    </div>
   )

@@ -7,7 +7,7 @@ import WishlistHeartIcon from '../assets/Images/CommonImg/WishlistHeartIcon.svg'
  import {authContext} from './Context.jsx'
 
 const Home = () => {
-const {data,category} = useContext(authContext);
+const {data,category,addItemToCart,cartItem} = useContext(authContext);
 let slicedData = data.slice(0,4);
   return (
     <>
@@ -47,7 +47,7 @@ category.map((product,index)=>(
         <h3 style={{marginTop:'15px'}}>{product.title.slice(0,40)}...</h3> 
          <p  style={{marginTop:'10px',fontSize:'17px'}}>{product.description.slice(0,70)}...</p> 
       <div className="wishIcon" onClick={()=>addProductToWishlist(product.id)}><img src={WishlistHeartIcon} alt="" style={{marginTop:'3px'}} /></div>
-          <button className="AddToCartBtn">Add To Cart</button>
+   <button className="AddToCartBtn" onClick={()=>addItemToCart(product.id)}>Add To Cart</button>
       </div>
       ))
     }

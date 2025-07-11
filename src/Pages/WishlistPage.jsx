@@ -3,7 +3,7 @@ import {authContext} from '../Components/Context.jsx'
 import deleteIcon from '../assets/Images/CommonImg/deleteIcon.svg'
 
 const WishlistPage = () => {
-  const {data,wishlistItem,deleteProductFromWishlist} = useContext(authContext);
+  const {data,wishlistItem,deleteProductFromWishlist,addItemToCart,cartItem} = useContext(authContext);
   const wishlist = data.filter((prod,ind)=> wishlistItem.includes(prod.id));
   return (
     <>
@@ -21,7 +21,8 @@ return(
          <p  style={{marginTop:'10px',fontSize:'17px'}}>{product.description.slice(0,70)}...</p> 
           {/* <div className="wishIcon" onClick={()=>addProductToWishlist(product.id)}><img src={WishlistHeartIcon} alt="" style={{marginTop:'3px'}} /></div> */}
           <div className="wishIcon" onClick={()=>deleteProductFromWishlist(product.id)}><img src={deleteIcon} alt="" style={{marginTop:'3px'}} /></div>
-          <button className="AddToCartBtn">Add To Cart</button>
+              <h3 style={{marginTop:'7px'}}>Price : ${product.price}</h3> 
+           <button className="AddToCartBtn" onClick={()=>addItemToCart(product.id)}>Add To Cart</button>
       </div>
   </>
 )

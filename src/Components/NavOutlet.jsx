@@ -3,6 +3,7 @@ import ExclusiveLogo from '../assets/Images/HomeImg/ExclusiveLogo.svg'
 import WishlistIcon from '../assets/Images/HomeImg/WishlistIcon.svg'
 import cartIcon from '../assets/Images/HomeImg/cartIcon.svg'
 import searchIcon from '../assets/Images/HomeImg/searchIcon.svg'
+import {NavLink} from 'react-router-dom'
 
 const NavOutlet = () => {
   return (
@@ -12,19 +13,19 @@ const NavOutlet = () => {
     </div>
     <div className="ml-[80px]">
         <ul className="flex list-style-none ml-5" style={{listStyle:'none'}}>
-            <li style={{marginRight:'18px',fontSize:'17px'}}>
+           <NavLink to='/'> <li style={{marginRight:'18px',fontSize:'17px'}}>
                 Home
-            </li>
+            </li></NavLink>
 
-             <li style={{marginRight:'18px',fontSize:'17px'}}>
+           <NavLink to='/'>  <li style={{marginRight:'18px',fontSize:'17px'}}>
                 About
-            </li>
-             <li style={{marginRight:'18px',fontSize:'17px'}}>
+            </li></NavLink>
+            <NavLink to='/all-products'> <li style={{marginRight:'18px',fontSize:'17px'}}>
                 All Products
-            </li>
-             <li style={{marginRight:'18px',fontSize:'17px'}}>
+            </li></NavLink>
+            <NavLink to='/register'> <li style={{marginRight:'18px',fontSize:'17px'}}>
                 Signup
-            </li>
+            </li></NavLink>
         </ul>
     </div>
     <div className="ml-[130px]" style={{position:'relative'}}>
@@ -32,8 +33,8 @@ const NavOutlet = () => {
     <img src={searchIcon} alt="" style={{height:'16px',width:'16px',position:'absolute',top:'10px',right:'17px'}}/>
     </div>
       <div className="ml-[80px]">
-  <img src={WishlistIcon} alt="" className="h-5 w-5" style={{height:'21px',width:'21px',marginRight:'14px'}}/>
-  <img src={cartIcon} alt="" className="h-5 w-5" style={{height:'24px',width:'24px'}}/>
+       <NavLink to='/wishlist'>  <img src={WishlistIcon} alt="" className="h-5 w-5" style={{height:'21px',width:'21px',marginRight:'14px'}}/></NavLink>
+       <NavLink to='/cart-page'>  <img src={cartIcon} alt="" className="h-5 w-5" style={{height:'24px',width:'24px'}}/></NavLink>
     </div>
    </div>
   )

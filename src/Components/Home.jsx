@@ -1,31 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import axios from 'axios'
 import BannerHome from '../assets/Images/HomeImg/BannerHome.svg'
 import WishlistHeartIcon from '../assets/Images/CommonImg/WishlistHeartIcon.svg'
  import { toast } from 'react-toastify';
+ import {Link} from 'react-router-dom'
+ import {authContext} from './Context.jsx'
 
 const Home = () => {
-  const [data,setData] = useState([]);
-  const [category,setCategory] = useState([]);
-
-  const getData = async() =>{
-    try {
-      const response = await axios.get('https://fakestoreapi.com/products');
-      if(response){
-        setData(response.data);
-        const categories = response.data.map((item,ind)=>item.category);
-        const uniqueCategories = [...new Set(categories)];
-        setCategory(uniqueCategories);
-      }else{
-        toast.error("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(()=>{
-    getData();
-  },[]);
+const {data,category} = useContext(authContext);
+let slicedData = data.slice(0,4);
   return (
     <>
    <div className="flex items-center justify-around">
@@ -54,16 +37,16 @@ category.map((product,index)=>(
    <div className="homeProducts">
    <div className="flex items-center justify-between" style={{padding:'1px 55px'}}>
     <h2>Best Selling Products</h2>
-    <button style={{height:'46px',width:'110px',backgroundColor:'#E94747',border:'none',borderRadius:'4px',fontSize:'15px',fontWeight:'400',color:'white'}}>View All</button>
+   <Link to='/all-products'> <button style={{height:'46px',width:'110px',backgroundColor:'#E94747',border:'none',borderRadius:'4px',fontSize:'15px',fontWeight:'400',color:'white'}}>View All</button></Link>
    </div>
    <div className="productDiv">
     {
-      data.map((product,ind)=>(
+      slicedData.map((product,ind)=>(
       <div className="cards" key={ind}>
       <img src={product.image} alt="" style={{height:'100px',width:'160px'}}/>
         <h3 style={{marginTop:'15px'}}>{product.title.slice(0,40)}...</h3> 
          <p  style={{marginTop:'10px',fontSize:'17px'}}>{product.description.slice(0,70)}...</p> 
-          <div className="wishIcon"><img src={WishlistHeartIcon} alt="" /></div>
+      <div className="wishIcon" onClick={()=>addProductToWishlist(product.id)}><img src={WishlistHeartIcon} alt="" style={{marginTop:'3px'}} /></div>
           <button className="AddToCartBtn">Add To Cart</button>
       </div>
       ))
